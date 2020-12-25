@@ -365,7 +365,8 @@ go run cmd/publisher/publish.go --logtostderr --v=2 --timestamp="2020-10-10T23:0
 >
 > If the firmware vendor is complicit in the attack, then all is still not lost...
 > Notice that the FT monitor has detected the malware in the new firmware too:
-> ```
+>
+> ```console
 >    Malware detected matched pattern H4x0r3d
 > ```
 >
