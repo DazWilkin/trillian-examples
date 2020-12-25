@@ -201,6 +201,8 @@ in the last step).
    go run ./cmd/flash_tool/ --logtostderr --device=dummy --update_file=/tmp/update.ota --device_storage=/tmp/dummy_device  # --force if it's the first time
    ```
 
+   There should now be 2 files (`bunde.json` and `firmware.bin`) in `/tmp/dummy_device`.
+
 2. Boot the device.
 
    We'll boot the device emulator to check that everything is working ok.
