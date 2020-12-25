@@ -264,8 +264,8 @@ go run ./cmd/emulator/dummy --logtostderr --dummy_storage_dir=/tmp/dummy_device
 
 We should see that the device refuses to boot, with an error similar to this:
 
-```
-dummy_emu.go:41] ROM: "failed to verify bundle: firmware measurement does not match metadata (0xefb19feba9ea0e0d5de73ac16d8aa9c4ceb092ecd13eab5548f49a61e85c367a2f2c8ce1eb36b67e1407148406705e67663dc5b6d3f05a45475f6e4a2b69e285 != 0xbf2f21936b66a0665883716ea4b1ceda609304ad76dd48f6423128bc36d4cb0fb5effaa9c1f2e328a5cfc25d2cb89a337d4285a8bc3e22dbb99bddbed19e7095)"
+```console
+ROM: "failed to verify bundle: firmware measurement does not match metadata (0xefb19feba9ea0e0d5de73ac16d8aa9c4ceb092ecd13eab5548f49a61e85c367a2f2c8ce1eb36b67e1407148406705e67663dc5b6d3f05a45475f6e4a2b69e285 != 0xbf2f21936b66a0665883716ea4b1ceda609304ad76dd48f6423128bc36d4cb0fb5effaa9c1f2e328a5cfc25d2cb89a337d4285a8bc3e22dbb99bddbed19e7095)"
 ```
 
 > :frog: This happened because the device _measured_ the firmware and compared that
