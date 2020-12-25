@@ -110,7 +110,7 @@ Prerequisites:
 
 ```bash
 export MYSQL_ROOT_PASSWORD="$(openssl rand -hex 16)"
-docker-compose -f examples/deployment/docker-compose.yml up trillian-log-server trillian-log-signer
+docker-compose -f examples/deployment/docker-compose.yml up mysql trillian-log-server trillian-log-signer
 ```
 
 #### Terminal 1½ - Provision Log Tree:
