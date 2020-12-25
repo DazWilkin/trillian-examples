@@ -316,10 +316,10 @@ Run the following command:
 
 ```bash
 go run ./cmd/hacker/modify_bundle \
-   --device dummy \
-   --binary ./testdata/firmware/dummy_device/hacked.wasm \
-   --input /tmp/dummy_device/bundle.json \
-   --output /tmp/dummy_device/bundle.json \
+   --device=dummy \
+   --binary=./testdata/firmware/dummy_device/hacked.wasm \
+   --input=/tmp/dummy_device/bundle.json \
+   --output=/tmp/dummy_device/bundle.json \
    --sign=true
 ```
 
