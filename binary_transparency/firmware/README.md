@@ -381,7 +381,7 @@ go run cmd/publisher/publish.go --logtostderr --v=2 --timestamp="2020-10-10T23:0
 > Notice that the FT monitor has detected the malware in the new firmware too:
 >
 > ```console
->    Malware detected matched pattern H4x0r3d
+> Malware detected at log index 1, in firmware: dummy/v1 built at 2020-10-10T23:00:00.00Z with image hash 0x...
 > ```
 >
 > Anybody else running a monitor also knows that malicious firmware has been
