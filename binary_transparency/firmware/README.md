@@ -158,11 +158,17 @@ The vendor is going to publish a new, legitimate, firmware now.
 go run cmd/publisher/publish.go --logtostderr --v=2 --timestamp="2020-10-10T15:30:20.10Z" --binary_path=./testdata/firmware/dummy_device/example.wasm --output_path=/tmp/update.ota --device=dummy
 ```
 
+> **NOTE** The time `15:30:20.10Z` of this, legitimate log entry.
+
   This creates and submits a new firmware manifest to the log, waits for it to be
   included, and then builds a firmware update package ("OTA") and writes it out to local disk.
 
   > :mag_right: Very shortly you should see that the new firmware entry has
   > been spotted by the `FT monitor` above.
+  >
+  > ```console
+  > Found firmware (@0): dummy/v1 built at 2020-10-10T15:30:20.10Z with image hash 0x...
+  > ```
   >
   > This is important! If the `Firmware Vendor` is paying attention to the
   > contents of the log, they can check that every piece of firmware
@@ -360,7 +366,15 @@ add their modified manifest+firmware to the log...
 go run cmd/publisher/publish.go --logtostderr --v=2 --timestamp="2020-10-10T23:00:00.00Z" --binary_path=./testdata/firmware/dummy_device/hacked.wasm --output_path=/tmp/bad_update.ota --device=dummy
 ```
 
+> **NOTE** The time `23:00:00.00Z` of the hacker's nefarious log entry.
+
 > :frog: However, notice that the `FT Monitor` has spotted the firmware!
+>
+> ```console
+> Found firmware (@0): dummy/v1 built at 2020-10-10T15:30:20.10Z with image hash 0x
+> Found firmware (@1): dummy/v1 built at 2020-10-10T23:00:00.00Z with image hash 0x...
+> ```
+>
 > Now the firmware vendor knows they have been compromised and can take action. :police:
 >
 > If the firmware vendor is complicit in the attack, then all is still not lost...
