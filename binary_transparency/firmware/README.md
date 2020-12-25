@@ -117,7 +117,8 @@ docker-compose -f examples/deployment/docker-compose.yml up mysql trillian-log-s
 * Run the following command to create a new tree inside Trillian, this only needs to be done once:
 
 ```bash
-go run github.com/google/trillian/cmd/createtree --admin_server=localhost:8090
+go run github.com/google/trillian/cmd/createtree \
+  --admin_server=localhost:8090
 ```
 
 Record the tree ID that is returned by the command above, it will be referred to
@@ -131,7 +132,11 @@ as $TREE_ID by subsequent commands:
 
 ```bash
 export CAS_DB_FILE='/full/path/to/file.db'
-go run ./cmd/ft_personality/ --logtostderr -v=2 --tree_id=$TREE_ID --cas_db_file=${CAS_DB_FILE}
+go run ./cmd/ft_personality/ \
+  --logtostderr \
+  --v=2 \
+  --tree_id=$TREE_ID \
+  --cas_db_file=${CAS_DB_FILE}
 ```
 
 #### Terminal 3 - FT monitor
@@ -145,7 +150,10 @@ and consider that any binary containing that string is a bad one.
   the command below to start a monitor:
 
 ```bash
-go run ./cmd/ft_monitor/ --logtostderr --keyword="H4x0r3d"
+go run ./cmd/ft_monitor/ \
+  --logtostderr \
+  --v=2 \
+  --keyword="H4x0r3d"
 ```
 
 #### Terminal 4 - Firmware Vendor
@@ -155,7 +163,13 @@ The vendor is going to publish a new, legitimate, firmware now.
 * We're going to log a new "firmware" build, as the vendor would:
 
 ```bash
-go run cmd/publisher/publish.go --logtostderr --v=2 --timestamp="2020-10-10T15:30:20.10Z" --binary_path=./testdata/firmware/dummy_device/example.wasm --output_path=/tmp/update.ota --device=dummy
+go run cmd/publisher/publish.go \
+  --logtostderr \
+  --v=2 \
+  --timestamp="2020-10-10T15:30:20.10Z" \
+  --binary_path=./testdata/firmware/dummy_device/example.wasm \
+  --output_path=/tmp/update.ota \
+  --device=dummy
 ```
 
 > **NOTE** The time `15:30:20.10Z` of this, legitimate log entry.
@@ -204,7 +218,12 @@ in the last step).
    > In both of these cases, you can use the `--force` flag on the `flash_tool`.
 
    ```bash
-   go run ./cmd/flash_tool/ --logtostderr --device=dummy --update_file=/tmp/update.ota --device_storage=/tmp/dummy_device  # --force if it's the first time
+   go run ./cmd/flash_tool/ \
+     --logtostderr \
+     --v=2 \
+     --device=dummy \
+     --update_file=/tmp/update.ota \
+     --device_storage=/tmp/dummy_device  # --force if it's the first time
    ```
 
    There should now be 2 files (`bunde.json` and `firmware.bin`) in `/tmp/dummy_device`.
@@ -216,7 +235,10 @@ in the last step).
    proofs stored on the device.
 
     ```bash
-    go run ./cmd/emulator/dummy --logtostderr --dummy_storage_dir=/tmp/dummy_device
+    go run ./cmd/emulator/dummy \
+      --logtostderr \
+      --v=2 \
+      --dummy_storage_dir=/tmp/dummy_device
     ```
 
   You should see something similar to the following. Importantly, the output
@@ -252,7 +274,9 @@ Let's imagine the hacker has access to our device, they're going to write their
 malicious firmware directly over the top of our device's firmware:
 
 ```bash
-cp testdata/firmware/dummy_device/hacked.wasm /tmp/dummy_device/firmware.bin
+cp \
+  testdata/firmware/dummy_device/hacked.wasm \
+  /tmp/dummy_device/firmware.bin
 echo "mwuhahahaha :eyes:"
 ```
 
@@ -265,7 +289,10 @@ been HACKED!
 Start up the device:
 
 ```bash
-go run ./cmd/emulator/dummy --logtostderr --dummy_storage_dir=/tmp/dummy_device
+go run ./cmd/emulator/dummy \
+  --logtostderr \
+  --v=2 \
+  --dummy_storage_dir=/tmp/dummy_device
 ```
 
 We should see that the device refuses to boot, with an error similar to this:
@@ -288,11 +315,11 @@ Run the following command:
 
 ```bash
 go run ./cmd/hacker/modify_bundle \
-   --device=dummy \
-   --binary=./testdata/firmware/dummy_device/hacked.wasm \
-   --input=/tmp/dummy_device/bundle.json \
-   --output=/tmp/dummy_device/bundle.json \
-   --sign=false
+  --device=dummy \
+  --binary=./testdata/firmware/dummy_device/hacked.wasm \
+  --input=/tmp/dummy_device/bundle.json \
+  --output=/tmp/dummy_device/bundle.json \
+  --sign=false
 ```
 
 Let's watch as the device owner turns on their device in the next step...
@@ -322,11 +349,11 @@ Run the following command:
 
 ```bash
 go run ./cmd/hacker/modify_bundle \
-   --device=dummy \
-   --binary=./testdata/firmware/dummy_device/hacked.wasm \
-   --input=/tmp/dummy_device/bundle.json \
-   --output=/tmp/dummy_device/bundle.json \
-   --sign=true
+  --device=dummy \
+  --binary=./testdata/firmware/dummy_device/hacked.wasm \
+  --input=/tmp/dummy_device/bundle.json \
+  --output=/tmp/dummy_device/bundle.json \
+  --sign=true
 ```
 
 Let's watch as the device owner turns on their device in the next step...
@@ -336,7 +363,10 @@ Let's watch as the device owner turns on their device in the next step...
 Start the device:
 
 ```bash
-go run ./cmd/emulator/dummy --logtostderr --dummy_storage_dir=/tmp/dummy_device
+go run ./cmd/emulator/dummy \
+  --logtostderr \
+  --v=2 \
+  --dummy_storage_dir=/tmp/dummy_device
 ```
 
 We've got past the signature check, but now there's another error:
@@ -363,7 +393,13 @@ Let's have the hacker break into the firmware vendor's offices and
 add their modified manifest+firmware to the log...
 
 ```bash
-go run cmd/publisher/publish.go --logtostderr --v=2 --timestamp="2020-10-10T23:00:00.00Z" --binary_path=./testdata/firmware/dummy_device/hacked.wasm --output_path=/tmp/bad_update.ota --device=dummy
+go run cmd/publisher/publish.go \
+  --logtostderr \
+  --v=2 \
+  --timestamp="2020-10-10T23:00:00.00Z" \
+  --binary_path=./testdata/firmware/dummy_device/hacked.wasm \
+  --output_path=/tmp/bad_update.ota \
+  --device=dummy
 ```
 
 > **NOTE** The time `23:00:00.00Z` of the hacker's nefarious log entry.
