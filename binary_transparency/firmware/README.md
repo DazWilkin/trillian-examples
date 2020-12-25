@@ -211,7 +211,7 @@ in the last step).
     go run ./cmd/emulator/dummy --logtostderr --dummy_storage_dir=/tmp/dummy_device
     ```
 
-> :frog: Because both the `flash_tool` and the device itself verifies the
+> :frog: Because both the `flash_tool` and the device itself verify the
 > correctness of the inclusion proofs, they are convinced that the firmware
 > is now _discoverable_ - anybody looking at the contents of the log _also_
 > knows about its existence: this doesn't guarantee that the firmware is
