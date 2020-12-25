@@ -302,7 +302,7 @@ go run ./cmd/emulator/dummy --logtostderr --dummy_storage_dir=/tmp/dummy_device
 and _again_, even though the device now gets past the firmware measurement check
 we should see that the device still refuses to boot, with an error similar to:
 
-```
+```console
 ROM: "failed to verify bundle: failed to verify signature on FirmwareStatement: failed to verify signature crypto/rsa: verification error"
 exit status 1
 ```
