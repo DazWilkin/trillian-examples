@@ -282,10 +282,10 @@ Run the following command:
 
 ```bash
 go run ./cmd/hacker/modify_bundle \
-   --device dummy \
-   --binary ./testdata/firmware/dummy_device/hacked.wasm \
-   --input /tmp/dummy_device/bundle.json \
-   --output /tmp/dummy_device/bundle.json \
+   --device=dummy \
+   --binary=./testdata/firmware/dummy_device/hacked.wasm \
+   --input=/tmp/dummy_device/bundle.json \
+   --output=/tmp/dummy_device/bundle.json \
    --sign=false
 ```
 
@@ -335,8 +335,8 @@ go run ./cmd/emulator/dummy --logtostderr --dummy_storage_dir=/tmp/dummy_device
 
 We've got past the signature check, but now there's another error:
 
-```
-dummy_emu.go:41] ROM: "failed to verify bundle: invalid inclusion proof in bundle: calculated root:\n[202 202 214 35 92 129 74 43 92 63 27 232 69 79 93 26 187 86 24 174 32 49 53 19 122 252 252 241 139 226 122 79]\n does not match expected root:\n[186 61 229 40 73 60 245 168 87 2 6 107 225 25 186 169 85 12 74 158 126 168 255 168 27 149 245 138 27 211 67 234]"
+```console
+ROM: "failed to verify bundle: invalid inclusion proof in bundle: calculated root:\n[202 202 214 35 92 129 74 43 92 63 27 232 69 79 93 26 187 86 24 174 32 49 53 19 122 252 252 241 139 226 122 79]\n does not match expected root:\n[186 61 229 40 73 60 245 168 87 2 6 107 225 25 186 169 85 12 74 158 126 168 255 168 27 149 245 138 27 211 67 234]"
 exit status 1
 ```
 
