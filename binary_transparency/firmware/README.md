@@ -203,7 +203,7 @@ in the last step).
 
    There should now be 2 files (`bunde.json` and `firmware.bin`) in `/tmp/dummy_device`.
 
-2. Boot the device.
+2. Boot the device. You may repeat this step.
 
    We'll boot the device emulator to check that everything is working ok.
    The "ROM" on the dummy device verifies the integrity of the firmware and
@@ -213,12 +213,24 @@ in the last step).
     go run ./cmd/emulator/dummy --logtostderr --dummy_storage_dir=/tmp/dummy_device
     ```
 
-> :frog: Because both the `flash_tool` and the device itself verify the
-> correctness of the inclusion proofs, they are convinced that the firmware
-> is now _discoverable_ - anybody looking at the contents of the log _also_
-> knows about its existence: this doesn't guarantee that the firmware is
-> _"good"_, but we know at least that it can't be a covert targeted attack, _and_
-> we can assume that the `Firmware vendor` is aware of it too.
+  You should see something similar to the following. Importantly, the output
+  includes `Bundle verification passed`:
+
+  ```console
+  ----RESET----
+  Powering up bananas, configuring Romulans, feeding the watchdogs
+  Configuring flash and loading FT artifacts from "/tmp/dummy_device"...
+  Bundle verification passed, prepared to boot
+  [app] print: Hello world!
+  return value = 0, duration = 6.401µs
+  ```
+
+  > :frog: Because both the `flash_tool` and the device itself verify the
+  > correctness of the inclusion proofs, they are convinced that the firmware
+  > is now _discoverable_ - anybody looking at the contents of the log _also_
+  > knows about its existence: this doesn't guarantee that the firmware is
+  > _"good"_, but we know at least that it can't be a covert targeted attack, _and_
+  > we can assume that the `Firmware vendor` is aware of it too.
 
 #### Terminal 666 - The Hacker :shipit::computer:
 _"Nice system you've got there. Let's test it..."_
