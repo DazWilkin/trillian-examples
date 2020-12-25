@@ -1,5 +1,5 @@
-Firmware Transparency
-=====================
+Firmware Transparency (FT)
+==========================
 
 This directory contains a demonstration of applying transparency patterns and
 principles to the problem of firmware updates.  In particular it will focus on
