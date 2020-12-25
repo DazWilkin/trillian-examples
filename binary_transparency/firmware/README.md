@@ -131,7 +131,7 @@ as $TREE_ID by subsequent commands:
 
 ```bash
 export CAS_DB_FILE='/full/path/to/file.db'
-go run ./cmd/ft_personality/main.go --logtostderr -v=2 --tree_id=$TREE_ID --cas_db_file=${CAS_DB_FILE}
+go run ./cmd/ft_personality --logtostderr -v=2 --tree_id=$TREE_ID --cas_db_file=${CAS_DB_FILE}
 ```
 
 #### Terminal 3 - FT monitor
